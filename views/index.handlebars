@@ -4,14 +4,60 @@
     <div class="row">
         <div class="col-md-6">
             <ul>
-                {{#each answer}}
+                {{#each burgers}}
+                {{#unless devoured}}
                 <li>
                     <p>
-                        {{this.name}}
+                        {{this.burger_name}}
+                        <button class="btn-primary devour" value="{{this.id}}">Devour</button>
                     </p>
                 </li>
+                {{/unless}}
                 {{/each}}
             </ul>
         </div>
+        <div class="col-md-6">
+            <ul>
+                {{#each burgers}}
+                {{#if devoured}}
+                <li>
+                    <p>
+                        {{this.burger_name}}
+                    </p>
+                </li>
+            </ul>
+            {{/if}}
+            {{/each}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="add-burger">
+                <textarea type="text" id="new-burger" placeholder="Enter the name of the new burger!"></textarea>
+                <button class="btn btn-primary" type="submit" id="submit">Submit!</button>
+            </form>
+        </div>
     </div>
 </div>
+
+<script>
+    $('.devour').on('click', function (e) {
+        let id = $(this).val();
+        console.log(id);
+        $.ajax({
+            url: `/api/update/${id}`,
+            method: 'PUT',
+        }).then(location.reload());
+    });
+
+    $('#submit').on('click', function (e) {
+        e.preventDefault();
+        let newBurgerName = $('#new-burger').val().trim();
+        console.log(newBurgerName);
+        $.ajax({
+            url: `/api/new`,
+            method: 'POST',
+            data: { burgerName: newBurgerName }
+        }).then(location.reload());
+    });
+</script>

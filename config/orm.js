@@ -5,7 +5,7 @@ let orm = {
     let queryString = "SELECT * FROM ??";
     connection.query(queryString, [tableToSearch], (err, ans) => {
       if (err) throw err;
-      cb(console.log(ans));
+      cb(ans);
     });
   },
   insertOne: function(tableToSearch, burgerName, isDevoured, cb) {

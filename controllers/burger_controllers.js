@@ -5,17 +5,21 @@ let app = express();
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    burger.getBurgers();
-
-    res.render("index", { answer: ans });
+    burger.getBurgers(function(burgers) {
+      let hbsObject = {
+        burgers: burgers
+      };
+      console.log(hbsObject);
+      res.render("index", hbsObject);
+    });
   });
 
   app.post("/api/new", (req, res) => {
     console.log(req.body);
-    burger.insertOne(req.body.burgerName);
+    burger.insertBurger(req.body.burgerName);
   });
 
-  app.put("/api/new", (req, res) => {
-    burger.updateOne(req.body.burgerID);
+  app.put("/api/update/:id", (req, res) => {
+    burger.updateBurger(req.params.id);
   });
 };
