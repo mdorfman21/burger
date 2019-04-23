@@ -1,12 +1,14 @@
 let mysql = require("mysql");
 
-let connection = mysql.createConnection({
-  host: "localhost",
+const db = process.env.JAWSDB_URL || {
   port: 3306,
+  host: "localhost",
   user: "root",
   password: "",
   database: "burgers_db"
-});
+};
+
+let connection = mysql.createConnection(db);
 
 connection.connect(err => {
   if (err) {
