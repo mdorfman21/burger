@@ -3,29 +3,25 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <ul>
-                {{#each burgers}}
-                {{#unless devoured}}
-                <li>
-                    <p>
-                        {{this.burger_name}}
-                        <button class="btn-primary devour" value="{{this.id}}">Devour</button>
-                    </p>
-                </li>
-                {{/unless}}
-                {{/each}}
-            </ul>
+
+            {{#each burgers}}
+            {{#unless devoured}}
+
+            <p>
+                {{this.burger_name}}
+                <button class="btn-primary devour" value="{{this.id}}">Devour</button>
+            </p>
+
+            {{/unless}}
+            {{/each}}
+
         </div>
         <div class="col-md-6">
-            <ul>
-                {{#each burgers}}
-                {{#if devoured}}
-                <li>
-                    <p>
-                        {{this.burger_name}}
-                    </p>
-                </li>
-            </ul>
+            {{#each burgers}}
+            {{#if devoured}}
+            <p>
+                {{this.burger_name}}
+            </p>
             {{/if}}
             {{/each}}
         </div>
